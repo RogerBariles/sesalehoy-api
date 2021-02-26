@@ -16,13 +16,13 @@ public class CreateRoles implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
-		/*Roles rolAdmin = new Roles(RolesName.ROLE_ADMIN);
+		Roles rolAdmin = new Roles(RolesName.ROLE_ADMIN);
 		Roles rolSuperAdmin = new Roles(RolesName.ROLE_SUPER_ADMIN);
 		Roles rolUser = new Roles(RolesName.ROLE_EMPLEADO);
 		
 		roleService.save(rolAdmin);
 		roleService.save(rolSuperAdmin);
-		roleService.save(rolUser);*/
+		roleService.save(rolUser);
 	}
 
 }

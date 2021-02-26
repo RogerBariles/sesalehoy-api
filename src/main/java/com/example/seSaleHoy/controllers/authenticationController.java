@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.seSaleHoy.dto.JwtDTO;
+import com.example.seSaleHoy.dto.NewUser;
 import com.example.seSaleHoy.dto.UserLoginDTO;
 import com.example.seSaleHoy.entity.Roles;
 import com.example.seSaleHoy.entity.Users;
@@ -54,13 +55,13 @@ public class authenticationController {
 	JwtProvider jwtProvider;
 	
 	@PostMapping( name="newUser", path="user")
-	public ResponseEntity<?> newUser(@RequestBody UserLoginDTO userNew, BindingResult bindingResult) {
+	public ResponseEntity<?> newUser(@RequestBody NewUser userNew, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario Incompleto");
 		}
 		
 		
-		if(this.userService.existsByNameUser(userNew.getUserName())) {
+		if(this.userService.existsByNameUser(userNew.getNameUser())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario ya existente");
 		}
 		
@@ -69,7 +70,7 @@ public class authenticationController {
 		}
 		
 		Users user = new Users(
-				userNew.getUserName(),
+				userNew.getNameUser(),
 				userNew.getEmail(),
 				userNew.getNumero(),
 				passwordEncoder.encode(userNew.getPassword()));
@@ -98,7 +99,7 @@ public class authenticationController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Credenciales incorrectas");
 		}
 		
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUserName(), loginUser.getPassword()));
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getNameUser(), loginUser.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		String jwt = jwtProvider.generateToken(authentication,loginUser);

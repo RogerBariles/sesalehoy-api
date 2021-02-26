@@ -14,15 +14,19 @@ public class UsersFirst implements UserDetails{
 		
 	private String nameUser;	
 	private String password;
+	private String email;
+	private String numero;
 
 	private Collection<? extends GrantedAuthority> authorities; //cambiamos de tipo Role a autoridades
 
 	
-	public UsersFirst(String nameUser, String password,
+	public UsersFirst(String nameUser, String password,  String email, String numero,
 			Collection<? extends GrantedAuthority> authorities) {
 		super();
 		this.nameUser = nameUser;
 		this.password = password;
+		this.email = email;
+		this.numero = numero;
 		this.authorities = authorities;
 	}
 	
@@ -32,49 +36,62 @@ public class UsersFirst implements UserDetails{
 		List<GrantedAuthority> authorities = user.getRoles().stream().map(rol -> new SimpleGrantedAuthority(
 				rol.getRol().name())).collect(Collectors.toList());
 		
-		return new UsersFirst(user.getNameUser(), user.getPassword(), authorities);
+		return new UsersFirst(user.getNameUser(), user.getPassword(), user.getEmail(), user.getNumero(), authorities);
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return null;
+		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		return password;
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return nameUser;
 	}
+	
+	
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+	
+	
+	public String getNumero() {
+		// TODO Auto-generated method stub
+		return numero;
+	}
+	
 
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 public class JwtDTO {
 
 	private String token;
-	private String bearer = "Bearer ";
+	private String bearer = "Bearer";
 	private String nameUser;
 	private Collection<? extends GrantedAuthority> authorities;
 	

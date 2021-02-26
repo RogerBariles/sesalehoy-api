@@ -37,6 +37,12 @@ public class Users {
 			)
 	private Set<Roles> roles = new HashSet<>();
 	
+	
+	
+	public Users() {
+		super();
+	}
+	
 	public Users(String nameUser, String email, String numero, String password) {
 		super();
 		this.nameUser = nameUser;
@@ -48,7 +54,7 @@ public class Users {
 		return id;
 	}
 	public void setId(Long id) {
-		id = id;
+		this.id = id;
 	}
 	public String getNameUser() {
 		return nameUser;
